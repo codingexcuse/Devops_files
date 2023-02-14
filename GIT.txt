@@ -1,0 +1,207 @@
+GIT:
+
+                           |-----  Working Directory
+                           |                
+                           |[Git add]      |
+                           |               V
+                           |
+                           |-------- Staging Area --------|
+                                                          |
+                                          |               |   
+                                          V  [Git commit] |  
+                                                          |
+                                     Repository ----------|
+
+
+
+-> every file in git will be initially working directory we cant able to see the commited changes if anyone has done in that.
+-> when we give a command git add we come into staging area in which it is a draft space.
+-> repository is where all files are located in which you can see if someone commits the changes.
+
+
+
+
+
+installation of  Git: 
+
+This will install Git locally.
+-> yum install git -y
+
+To intialize the empty git repository.
+-> git init .
+
+Basic commands :
+
+-> create a new file : touch filename
+-> now add that file to staging area : git add
+-> commit the file with message : git commit -m "commit message" filename
+-> to see the details of that file : git log
+-> add message in the file : cat>filename
+-> to check the status of Git : git status
+
+
+Create a file and add a message and that from working directory -> staging area -> Repository.
+
+creating file
+[Root]-> touch f1
+
+Write something in the file
+[Root]-> cat>f1
+  * this consists of File1 things
+  *ctrl+d
+
+Check the status in the git for the file f1
+[Root]-> git status
+  *untracked Files:
+   bash_logout
+   bashrc
+   cshrc
+   f1
+
+Now the file is in working directory get that file into staging area.
+[Root]->git add f1
+
+[Root]-> git status
+  * new file: f1
+  *untracked Files:
+   bash_logout
+   bashrc
+   cshrc
+
+Now file is in staging area get that file into Repository.  
+
+[Root]-> git commit -m "file1" f1
+[Root]-> git log
+  *Author: root <root@ip-172-31-40.....>
+    file1
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CONFIGURATION OF USER:
+
+-> what is the use of creating new user:
+   when its in user and someone add,create,commit the files we cant see where as in user mode we can see if anyone add,create,commit the files.
+
+
+Create a new user and and perform the same steps done as above.
+
+[Root]-> git config user.name "someone"
+[Root]-> git config user.email "someone@gmail.com"
+
+Create new file
+
+[Root]-> touch f2
+[Root]-> cat>f2
+   * This file contains F2
+   * ctrl+d
+[Root]-> git add f2
+[Root]-> git status
+   * new file: f2
+[Root]-> git commit -m "File2" f2
+   * 1 file changed. 1 insertion(+)
+[Root]-> git log
+   * author : someone <someone@gmail.com>
+     file2
+   *Author: root <root@ip-172-31-40.....>
+     file1
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+HOW to create add and commit multiple files into Git.
+
+[Root]-> touch some{1..4}
+[Root]-> git status
+	*untracked Files:
+		Bash_history
+		bashrc
+		cshrc
+		tcshrc
+		some1
+		some2
+		some3
+		some4
+
+-> Now get all the files into staged Area.
+
+[Root]-> git add.
+[Root]-> git status 
+         *New Files:
+		Bash_history
+		bashrc
+		cshrc
+		tcshrc
+		some1
+		some2
+		some3
+		some4
+
+-> now remove Bash_history from staging area.
+
+[Root]-> git restore --staged .Bash_history
+[Root]-> git status
+	*New Files:
+		bashrc
+		cshrc
+		tcshrc
+		some1
+                some2
+		some3
+                some4
+        *untracked Files:
+		Bash_history
+
+-> Now remove all the files from staging area.
+
+[Root]-> git restore --staged.
+[Root]-> git status
+	*untracked Files:
+		Bash_history
+		bashrc
+		cshrc
+		tcshrc
+		some1
+		some2
+		some3
+		some4
+
+->Now get only the some files into staged area
+
+[Root]-> git add some*
+[Root]-> git status
+	*New Files:
+		some1
+                some2
+		some3
+                some4
+
+	*untracked Files:
+		Bash_history
+		bashrc
+		cshrc
+		tcshrc
+
+-> Now all some files are in staged area now get that into repository
+
+[Root]-> git commit -m "some changes" some*
+	*[Master] some changes
+	 Create mode 160 some1
+	 Create mode 162 some2
+	 Create mode 163 some3
+	 Create mode 164 some4
+
+-> ll is a command which shows you the files You have created.
+
+[Root]-> ll                                    
+	*total 6
+		some1
+		some2
+		some3
+		some4
+		f2
+		f1
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
